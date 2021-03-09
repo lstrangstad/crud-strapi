@@ -1,9 +1,10 @@
 import { loginSchema } from "../utils/schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { BASE_URL, AUTH_PATH } from "../utils/constants";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -11,6 +12,8 @@ const Login = () => {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(loginSchema),
   });
+
+  const [, setAuth] = useContext(AuthContext);
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -21,6 +24,7 @@ const Login = () => {
     try {
       const response = await axios.post(`${BASE_URL}${AUTH_PATH}`, data);
       console.log("response", response.data);
+      setAuth(response.data);
     } catch (error) {
       console.log("error", error);
       setLoginError(error.toString());
