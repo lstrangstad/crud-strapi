@@ -18,23 +18,6 @@ const EditProduct = () => {
     resolver: yupResolver(productSchema),
   });
 
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const response = await http.get(`${PRODUCTS_PATH}/${id}`);
-        console.log(response);
-        setProduct(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProduct();
-  }, [id]);
-
-  if (!product) {
-    return <p>Loading product...</p>;
-  }
-
   const onSubmit = async (data) => {
     setSubmitting(true);
     setUpdateError(null);
@@ -54,6 +37,23 @@ const EditProduct = () => {
     }
   };
 
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const response = await http.get(`${PRODUCTS_PATH}/${id}`);
+        console.log(response);
+        setProduct(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProduct();
+  }, [id]);
+
+  if (!product) {
+    return <p>Loading product...</p>;
+  }
+
   return (
     <>
       <h1>Edit Product</h1>
@@ -68,7 +68,7 @@ const EditProduct = () => {
               ref={register}
               defaultValue={product.title}
             />
-            {errors.title && <p>{errors.identifier.message}</p>}
+            {errors.title && <p>{errors.title.message}</p>}
           </div>
 
           <div>
