@@ -11,6 +11,10 @@ const Products = () => {
   const http = useAxios();
   const history = useHistory();
 
+  if (!auth) {
+    history.push("/login");
+  }
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -24,10 +28,6 @@ const Products = () => {
     getProducts();
   }, []);
 
-  if (!auth) {
-    history.push("/login");
-  }
-
   if (!products) {
     return <p>loading...</p>;
   }
@@ -35,7 +35,7 @@ const Products = () => {
   return (
     <>
       <h1>Products</h1>
-      {products?.map((product) => {
+      {products.map((product) => {
         return (
           <Link key={product.id} to={`/edit/${product.id}`}>
             <Item {...product} />;
