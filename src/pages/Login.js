@@ -5,15 +5,21 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { BASE_URL, AUTH_PATH } from "../utils/constants";
 import AuthContext from "../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
-  const [, setAuth] = useContext(AuthContext);
+  const [auth, setAuth] = useContext(AuthContext);
+
+  if (auth) {
+    history.push("/products");
+  }
 
   const onSubmit = async (data) => {
     setSubmitting(true);
