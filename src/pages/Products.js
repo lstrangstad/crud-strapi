@@ -8,6 +8,7 @@ import Item from "../components/Item";
 const Products = () => {
   const [auth] = useContext(AuthContext);
   const [products, setProducts] = useState(null);
+  const [render, setRender] = useState(0);
   const http = useAxios();
   const history = useHistory();
 
@@ -26,7 +27,19 @@ const Products = () => {
       }
     };
     getProducts();
-  }, []);
+  }, [render]);
+
+  const deleteProduct = async (id, productTitle) => {
+    try {
+      const response = await http.delete(`${PRODUCTS_PATH}/${id}`);
+      console.log(response);
+      alert(`${productTitle} has been deleted.`);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setRender(render + 1);
+    }
+  };
 
   if (!products) {
     return <p>loading...</p>;
@@ -37,9 +50,14 @@ const Products = () => {
       <h1>Products</h1>
       {products.map((product) => {
         return (
-          <Link key={product.id} to={`/edit/${product.id}`}>
-            <Item {...product} />;
-          </Link>
+          <div key={product.id}>
+            <Link to={`/edit/${product.id}`}>
+              <Item {...product} />
+            </Link>
+            <button onClick={() => deleteProduct(product.id, product.title)}>
+              Delete
+            </button>
+          </div>
         );
       })}
     </>
