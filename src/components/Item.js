@@ -4,7 +4,7 @@ const Item = (props) => {
     <div style={{ width: "100%", maxWidth: "500px" }}>
       <h2>{title}</h2>
       <img src={image_url} alt={title} style={{ width: "100%" }} />
-      <h3>{price}</h3>
+      <h3>${price}</h3>
       <p>{description}</p>
     </div>
   );
