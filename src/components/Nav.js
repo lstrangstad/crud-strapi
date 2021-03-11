@@ -18,6 +18,7 @@ const Nav = () => {
       {auth ? (
         <>
           | <Link to="/products">Products</Link> |{" "}
+          <Link to="/add">Add product</Link> |{" "}
           <button onClick={logout}>Log out</button>
         </>
       ) : (
