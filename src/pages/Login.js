@@ -10,16 +10,13 @@ import { useHistory } from "react-router-dom";
 const Login = () => {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
   const [auth, setAuth] = useContext(AuthContext);
-
-  if (auth) {
-    history.push("/products");
-  }
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -31,6 +28,11 @@ const Login = () => {
       const response = await axios.post(`${BASE_URL}${AUTH_PATH}`, data);
       console.log("response", response.data);
       setAuth(response.data);
+      setSuccess(true);
+
+      if (auth) {
+        history.push("/products");
+      }
     } catch (error) {
       console.log("error", error);
       setLoginError(error.toString());
@@ -38,10 +40,12 @@ const Login = () => {
       setSubmitting(false);
     }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {loginError && <p>{loginError}</p>}
       <fieldset disabled={submitting}>
+        {success ? <p>Successfully logged in</p> : null}
         <div>
           <input name="identifier" placeholder="Username" ref={register} />
           {errors.identifier && <p>{errors.identifier.message}</p>}
