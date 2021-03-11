@@ -1,13 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import useAxios from "../utils/useAxios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Item from "../components/Item";
 import { PRODUCTS_PATH } from "../utils/constants";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { productSchema } from "../utils/schemas";
+import AuthContext from "../context/AuthContext";
 
 const EditProduct = () => {
+  const [auth] = useContext(AuthContext);
+  const history = useHistory();
   const [product, setProduct] = useState(null);
   const { id } = useParams();
   const http = useAxios();
@@ -52,6 +55,10 @@ const EditProduct = () => {
 
   if (!product) {
     return <p>Loading product...</p>;
+  }
+
+  if (!auth) {
+    history.push("/login");
   }
 
   return (
