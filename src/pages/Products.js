@@ -47,19 +47,24 @@ const Products = () => {
 
   return (
     <>
-      <h1>Products</h1>
-      {products.map((product) => {
-        return (
-          <div key={product.id}>
-            <Link to={`/edit/${product.id}`}>
-              <Item {...product} />
-            </Link>
-            <button onClick={() => deleteProduct(product.id, product.title)}>
-              Delete
-            </button>
-          </div>
-        );
-      })}
+      <h1 className="container__heading">Products</h1>
+      <div className="container">
+        {products.map((product) => {
+          return (
+            <div className="container__card" key={product.id}>
+              <Link className="container__link" to={`/edit/${product.id}`}>
+                <Item {...product} />
+              </Link>
+              <button
+                className="container__button button"
+                onClick={() => deleteProduct(product.id, product.title)}
+              >
+                Delete
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };

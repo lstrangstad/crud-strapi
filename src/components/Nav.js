@@ -13,16 +13,29 @@ const Nav = () => {
   }
 
   return (
-    <nav>
-      <Link to="/">Home</Link>
+    <nav className="nav">
+      <Link className="nav__link" to="/">
+        Home
+      </Link>
       {auth ? (
         <>
-          | <Link to="/products">Products</Link> |{" "}
-          <Link to="/add">Add product</Link> |{" "}
-          <button onClick={logout}>Log out</button>
+          |{" "}
+          <Link className="nav__link" to="/products">
+            Products
+          </Link>{" "}
+          |{" "}
+          <Link className="nav__link" to="/add">
+            Add product
+          </Link>{" "}
+          |{" "}
+          <button className="nav__button" onClick={logout}>
+            Log out
+          </button>
         </>
       ) : (
-        <Link to="/login">Login</Link>
+        <Link className="nav__link" to="/login">
+          Login
+        </Link>
       )}
     </nav>
   );

@@ -63,58 +63,72 @@ const EditProduct = () => {
 
   return (
     <>
-      <h1>Edit Product</h1>
-      <Item {...product} />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {updateError && <p>{updateError}</p>}
-        <fieldset disabled={submitting}>
-          <div>
-            <input
-              name="title"
-              placeholder="Title"
-              ref={register}
-              defaultValue={product.title}
-            />
-            {errors.title && <p>{errors.title.message}</p>}
-          </div>
+      <h1 className="edit__heading">Edit Product</h1>
+      <div className="edit">
+        <Item {...product} />
+        <form className="edit__form" onSubmit={handleSubmit(onSubmit)}>
+          {updateError && <p className="edit_error">{updateError}</p>}
+          <fieldset className="edit__fieldset" disabled={submitting}>
+            <div className="edit__input-box">
+              <input
+                className="edit__input"
+                name="title"
+                placeholder="Title"
+                ref={register}
+                defaultValue={product.title}
+              />
+              {errors.title && (
+                <p className="edit_error">{errors.title.message}</p>
+              )}
+            </div>
 
-          <div>
-            <input
-              name="price"
-              placeholder="Price"
-              defaultValue={product.price}
-              ref={register}
-              type="number"
-            />
-            {errors.price && <p>{errors.price.message}</p>}
-          </div>
-          <div>
-            <textarea
-              name="description"
-              placeholder="Description"
-              defaultValue={product.description}
-              ref={register}
-              type="text"
-            />
-            {errors.description && <p>{errors.description.message}</p>}
-          </div>
-          <div>
-            <input
-              name="image_url"
-              placeholder="Image URL"
-              ref={register}
-              defaultValue={product.image_url}
-              type="text"
-            />
-            {errors.image_url && <p>{errors.image_url.message}</p>}
-          </div>
+            <div className="edit__input-box">
+              <input
+                className="edit__input"
+                name="price"
+                placeholder="Price"
+                defaultValue={product.price}
+                ref={register}
+                type="number"
+              />
+              {errors.price && (
+                <p className="edit_error">{errors.price.message}</p>
+              )}
+            </div>
+            <div className="edit__input-box">
+              <textarea
+                className="edit__textarea"
+                name="description"
+                placeholder="Description"
+                defaultValue={product.description}
+                ref={register}
+                type="text"
+              />
+              {errors.description && (
+                <p className="edit_error">{errors.description.message}</p>
+              )}
+            </div>
+            <div className="edit__input-box">
+              <input
+                className="edit__input"
+                name="image_url"
+                placeholder="Image URL"
+                ref={register}
+                defaultValue={product.image_url}
+                type="text"
+              />
+              {errors.image_url && (
+                <p className="edit_error">{errors.image_url.message}</p>
+              )}
+            </div>
 
-          <button type="submit">
-            {submitting ? "Updating ..." : "Update"}
-          </button>
-        </fieldset>
-      </form>
-      {success ? <p>Listing of {product.title} was updated</p> : null}
+            <button className="edit__button button" type="submit">
+              {submitting ? "Updating ..." : "Update"}
+            </button>
+          </fieldset>
+        </form>
+        {success ? <p>Listing of {product.title} was updated</p> : null}
+      </div>
     </>
   );
 };

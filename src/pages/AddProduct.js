@@ -44,19 +44,24 @@ const AddProduct = () => {
   }
 
   return (
-    <div>
-      <h1>Add product</h1>
-      {}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {postError && <p>{postError}</p>}
-        <fieldset disabled={submitting}>
-          <div>
-            <input name="title" placeholder="Title" ref={register} />
+    <div className="add">
+      <h1 className="add__heading">Add product</h1>
+      <form className="add__form" onSubmit={handleSubmit(onSubmit)}>
+        {postError && <p className="add__error">{postError}</p>}
+        <fieldset className="add__fieldset" disabled={submitting}>
+          <div className="add__input-box">
+            <input
+              className="add__input"
+              name="title"
+              placeholder="Title"
+              ref={register}
+            />
             {errors.title && <p>{errors.title.message}</p>}
           </div>
 
-          <div>
+          <div className="add__input-box">
             <input
+              className="add__input"
               name="price"
               placeholder="Price"
               ref={register}
@@ -64,8 +69,9 @@ const AddProduct = () => {
             />
             {errors.price && <p>{errors.price.message}</p>}
           </div>
-          <div>
+          <div className="add__input-box">
             <textarea
+              className="add__textarea"
               name="description"
               placeholder="Description"
               ref={register}
@@ -73,8 +79,9 @@ const AddProduct = () => {
             />
             {errors.description && <p>{errors.description.message}</p>}
           </div>
-          <div>
+          <div className="add__input-box">
             <input
+              className="add__input"
               name="image_url"
               placeholder="Image URL"
               ref={register}
@@ -83,8 +90,8 @@ const AddProduct = () => {
             {errors.image_url && <p>{errors.image_url.message}</p>}
           </div>
 
-          <button type="submit">
-            {submitting ? "Updating ..." : "Update"}
+          <button className="add__button" type="submit">
+            {submitting ? "Adding ..." : "Add"}
           </button>
         </fieldset>
       </form>

@@ -16,7 +16,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const [auth, setAuth] = useContext(AuthContext);
+  const [, setAuth] = useContext(AuthContext);
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -29,10 +29,6 @@ const Login = () => {
       console.log("response", response.data);
       setAuth(response.data);
       setSuccess(true);
-
-      if (auth) {
-        history.push("/products");
-      }
     } catch (error) {
       console.log("error", error);
       setLoginError(error.toString());
@@ -42,17 +38,25 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="login" onSubmit={handleSubmit(onSubmit)}>
       {loginError && <p>{loginError}</p>}
-      <fieldset disabled={submitting}>
-        {success ? <p>Successfully logged in</p> : null}
-        <div>
-          <input name="identifier" placeholder="Username" ref={register} />
+      <fieldset className="login__fieldset" disabled={submitting}>
+        {success ? (
+          <p className="login__success">Successfully logged in</p>
+        ) : null}
+        <div className="login__input-box">
+          <input
+            className="login__input"
+            name="identifier"
+            placeholder="Username"
+            ref={register}
+          />
           {errors.identifier && <p>{errors.identifier.message}</p>}
         </div>
 
-        <div>
+        <div className="login__input-box">
           <input
+            className="login__input"
             name="password"
             placeholder="Password"
             ref={register}
@@ -60,7 +64,9 @@ const Login = () => {
           />
           {errors.password && <p>{errors.password.message}</p>}
         </div>
-        <button type="submit">{submitting ? "Loggin in..." : "Login"}</button>
+        <button className="login__button" type="submit">
+          {submitting ? "Loggin in..." : "Login"}
+        </button>
       </fieldset>
     </form>
   );
