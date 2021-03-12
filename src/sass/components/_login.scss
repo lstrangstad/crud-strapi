@@ -1,0 +1,30 @@
+.login {
+  padding: 15px;
+
+  &__fieldset {
+    padding: 10px 15px;
+    background: lightblue;
+    border: none;
+  }
+
+  &__input-box {
+    padding: 5px 0;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+  }
+
+  &__button {
+    @include button;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .login {
+    max-width: 500px;
+  }
+}

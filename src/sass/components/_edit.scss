@@ -1,0 +1,45 @@
+.edit {
+  padding: 15px;
+
+  &__heading {
+    margin-bottom: 15px;
+  }
+
+  &__form {
+    padding: 15px 0;
+  }
+
+  &__fieldset {
+    padding: 10px 15px;
+    background: lightblue;
+    border: none;
+  }
+
+  &__input-box {
+    padding: 5px 0;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 5px;
+    border: none;
+  }
+
+  &__textarea {
+    height: 100px;
+  }
+
+  &__button {
+    @include button;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .edit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+  }
+}
